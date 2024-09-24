@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Daisy's Birthday</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
         
         body, html {
             height: 100%;
@@ -153,6 +153,11 @@
         </div>
     </div>
 
+    <audio id="preloadAudio" loop>
+        <source src="Forget_him.mp4" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
     <audio id="audioPlayer" loop>
         <source src="young_lover_blues.m4a" type="audio/mp4">
         Your browser does not support the audio element.
@@ -160,10 +165,16 @@
 
     <script>
         let passcode = '';
+        const preloadAudio = document.getElementById('preloadAudio');
         const audioPlayer = document.getElementById('audioPlayer');
         const vinylImage = document.getElementById('vinylImage');
         const playButton = document.getElementById('playButton');
         let isPlaying = false;
+
+        // Play preload audio on page load
+        window.onload = function() {
+            preloadAudio.play();
+        };
 
         function addDigit(digit) {
             if (passcode.length < 4) {
@@ -184,6 +195,8 @@
 
         function checkPasscode() {
             if (passcode === '1818') {
+                // Stop preload audio and play main audio
+                preloadAudio.pause();
                 document.getElementById('passwordPage').style.display = 'none';
                 document.getElementById('contentPage').style.display = 'block';
             } else {
